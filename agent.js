@@ -69,7 +69,7 @@ const agent = createAgent({
     - Call get_emails tool only if user query is related to emails.
     - Analyse the emails from get_emails tool and check for refund request.
     - If there are any emails related to refund, call refund tool.
-
+    - If the user rejects from refund tool, directly respond with tool message only.
   `,
   middleware: [
     humanInTheLoopMiddleware({
@@ -94,6 +94,8 @@ async function main() {
 
     if (!query) continue;
 
+    console.log(query === "1" ? "approve" : "reject");
+
     const response = await agent.invoke(
       interrupts.length
         ? new Command({
@@ -107,9 +109,13 @@ async function main() {
             messages: [{ role: "user", content: query }],
           },
       {
-        configurable: { thread_id: "1" },
+        configurable: { thread_id: "6" },
       }
     );
+
+    if (interrupts.length) {
+      console.log(response);
+    }
 
     let output = "";
 
@@ -124,6 +130,7 @@ async function main() {
         "\n\nChoose: \n";
 
       output += currentInterrupt?.value?.reviewConfigs[0]?.allowedDecisions
+        ?.filter((r) => r !== "edit")
         ?.map((key, index) => `${index + 1}. ${key}`)
         .join("\n");
     } else {
