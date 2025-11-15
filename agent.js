@@ -1,29 +1,9 @@
 import readline from "node:readline/promises";
 import * as z from "zod";
 import { createAgent, humanInTheLoopMiddleware, tool } from "langchain";
-import { ChatOllama } from "@langchain/ollama";
 import { MAILS } from "./data/emails.js";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { Command, MemorySaver } from "@langchain/langgraph";
-import { ChatGroq } from "@langchain/groq";
-
-const llmGoogle = new ChatGoogleGenerativeAI({
-  model: "gemini-2.5-pro",
-  temperature: 0,
-  maxRetries: 2,
-});
-
-const llmOllama = new ChatOllama({
-  model: "llama3.1:latest",
-  temperature: 0,
-  maxRetries: 2,
-});
-
-const llmGroq = new ChatGroq({
-  model: "openai/gpt-oss-120b",
-  temperature: 0,
-  maxRetries: 2,
-});
+import { llmGroq } from "./llm/index.js";
 
 const getWeather = tool(({ city }) => `It's always sunny in ${city}!`, {
   name: "get_weather",
