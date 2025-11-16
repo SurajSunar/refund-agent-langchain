@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --env-file=.env agent.js",
-    "dev-mcp-server": "node --env-file=.env ./mcp/simple/server.js",
-    "dev-mcp-client": "node --env-file=.env ./mcp/simple/client.js"
+    "dev-mcp-server": "node --env-file=.env server.js --watch",
+    "dev-mcp-client": "node --env-file=.env client.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,8 @@
     "@langchain/langgraph": "^1.0.2",
     "@langchain/ollama": "^1.0.1",
     "@modelcontextprotocol/sdk": "^1.22.0",
+    "@types/express": "^5.0.5",
+    "express": "^5.1.0",
     "langchain": "^1.0.4",
     "zod": "^4.1.12"
   }
