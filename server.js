@@ -49,6 +49,23 @@ server.registerTool(
   }
 );
 
+server.registerTool(
+  "multiple",
+  {
+    title: "Multiple Numbers",
+    description: "multiple two numbers",
+    inputSchema: { a: z.number(), b: z.number() },
+    outputSchema: { result: z.number() },
+  },
+  async ({ a, b }) => {
+    const result = a * b;
+    return {
+      content: [{ type: "text", text: `Sum is ${result}` }],
+      structuredContent: { result },
+    };
+  }
+);
+
 // 4. Define a “resource”
 server.resource(
   "status",

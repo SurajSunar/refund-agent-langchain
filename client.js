@@ -38,6 +38,12 @@ async function runClient() {
   });
   console.log("addNumbers result:", resp2.content);
 
+  const resp3 = await client.callTool({
+    name: "multiple",
+    arguments: { a: 5, b: 3 },
+  });
+  console.log("multiple result:", resp3.content);
+
   await client.close();
 }
 
