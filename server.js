@@ -4,6 +4,7 @@ import { randomUUID } from "crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
+import { error } from "console";
 
 // 1. Define your server info
 const serverInfo = {
@@ -31,18 +32,18 @@ server.tool(
   }
 );
 
-server.tool(
+server.registerTool(
   "addNumbers",
-  { a: z.number(), b: z.number() }, // input schema
+  {
+    title: "Add Numbers",
+    description: "Adds two numbers",
+    inputSchema: { a: z.number(), b: z.number() },
+    outputSchema: { sum: z.number() },
+  },
   async ({ a, b }) => {
     const sum = a + b;
     return {
-      content: [
-        {
-          type: "text",
-          text: `The sum of ${a} and ${b} is ${sum}`,
-        },
-      ],
+      content: [{ type: "text", text: `Sum is ${sum}` }],
       structuredContent: { sum },
     };
   }
