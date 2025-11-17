@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "surbhu-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "surbhu-mcp-server"]
+    }
+  }
+}

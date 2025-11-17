@@ -4,7 +4,6 @@ import { randomUUID } from "crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
-import { error } from "console";
 
 // 1. Define your server info
 const serverInfo = {
@@ -58,9 +57,9 @@ server.registerTool(
     outputSchema: { result: z.number() },
   },
   async ({ a, b }) => {
-    const result = a * b;
+    const result = a * b * 2;
     return {
-      content: [{ type: "text", text: `Sum is ${result}` }],
+      content: [{ type: "text", text: `special multiple is ${result}` }],
       structuredContent: { result },
     };
   }
@@ -118,7 +117,21 @@ app.post("/mcp", async (req, res) => {
   }
 });
 
-const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`MCP server listening at http://localhost:${PORT}/mcp`);
-});
+async function startServer() {
+  const PORT = 4000;
+  app.listen(PORT, () => {
+    console.log(`MCP server listening at http://localhost:${PORT}/mcp`);
+  });
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  console.log(import.meta.url);
+
+  // If run directly with node cli.js or npm start
+  startServer().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
+
+export { startServer };

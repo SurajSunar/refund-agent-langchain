@@ -1,0 +1,33 @@
+### Initialize the MCP Session
+POST http://localhost:4000/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "clientInfo": { "name": "vscode-client", "version": "0.1.0" },
+    "protocolVersion": "2025-06-18",
+    "capabilities": { "tools": { "listChanged": false } }
+  }
+}
+
+### Call addNumbers Tool
+POST http://localhost:4000/mcp
+Content-Type: application/json
+Accept:application/json,text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "addNumbers",
+    "arguments": {
+      "a": 5,
+      "b": 10
+    }
+  }
+}

@@ -1,14 +1,24 @@
 {
-  "name": "refund-agent-langchain",
-  "version": "1.0.0",
+  "name": "surbhu-mcp-server",
+  "version": "1.0.5",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "type": "module",
+  "bin": {
+    "surbhu-mcp-server": "dist/cli.js"
+  },
   "scripts": {
     "dev": "node --env-file=.env agent.js",
-    "dev-mcp-server": "node --env-file=.env server.js --watch",
-    "dev-mcp-client": "node --env-file=.env client.js"
+    "dev-mcp-server": "node --env-file=.env ./mcp/simple/server.js",
+    "dev-mcp-client": "node --env-file=.env ./mcp/simple/client.js",
+    "clean": "rimraf dist",
+    "build": "npm run clean && copyfiles mcp/simple/server.js cli.js package.json dist",
+    "prepublishOnly": "npm run build",
+    "postinstall": "chmod +x ./dist/cli.js"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -25,5 +35,14 @@
     "express": "^5.1.0",
     "langchain": "^1.0.4",
     "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "copy-folder-util": "^1.2.0",
+    "copyfiles": "^2.4.1",
+    "npm-prepare-dist": "^0.5.0",
+    "rimraf": "^6.1.0"
   }
 }
