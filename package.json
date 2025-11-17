@@ -37,12 +37,7 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "copy-folder-util": "^1.2.0",
     "copyfiles": "^2.4.1",
-    "npm-prepare-dist": "^0.5.0",
     "rimraf": "^6.1.0"
   }
 }
