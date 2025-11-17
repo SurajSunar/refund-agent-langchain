@@ -31,3 +31,39 @@ Accept:application/json,text/event-stream
     }
   }
 }
+
+### Call multiple Tool
+POST http://localhost:4000/mcp
+Content-Type: application/json
+Accept:application/json,text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "multiple",
+    "arguments": {
+      "a": 5,
+      "b": 10
+    }
+  }
+}
+
+
+### Call Customer Tool
+POST http://localhost:4000/mcp
+Content-Type: application/json
+Accept:application/json,text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "customerInfo",
+    "arguments": {
+      "query": "I didnt like the food served. Need to really work on this"
+    }
+  }
+}

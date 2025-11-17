@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "node --env-file=.env agent.js",
-    "dev-mcp-server": "node --env-file=.env ./mcp/simple/server.js",
+    "dev-mcp-server": "node --env-file=.env --watch ./mcp/simple/server.js",
     "dev-mcp-client": "node --env-file=.env ./mcp/simple/client.js",
     "clean": "rimraf dist",
     "build": "npm run clean && copyfiles mcp/simple/server.js cli.js package.json dist",

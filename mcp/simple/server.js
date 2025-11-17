@@ -4,6 +4,8 @@ import { randomUUID } from "crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
+import { llmGroq } from "../../llm/index.js";
+import { HumanMessage, SystemMessage } from "langchain";
 
 // 1. Define your server info
 const serverInfo = {
@@ -61,6 +63,33 @@ server.registerTool(
     return {
       content: [{ type: "text", text: `special multiple is ${result}` }],
       structuredContent: { result },
+    };
+  }
+);
+
+server.registerTool(
+  "customerInfo",
+  {
+    title: "Customer information",
+    description: "Query customer information",
+    inputSchema: { query: z.string() },
+    outputSchema: { result: z.string() },
+  },
+  async ({ query }) => {
+    const result = await llmGroq.invoke([
+      new SystemMessage(`
+        You are expert in analysing the customer information. Based on it, you need to classify as:
+         - feedback
+         - positive
+         - negative
+
+         Response should only be from classified words only. If result is other than expected words, say "General classification"
+        `),
+      new HumanMessage(query),
+    ]);
+    return {
+      content: [{ type: "text", text: `Result: ${result.content}` }],
+      structuredContent: { result: result.content },
     };
   }
 );
