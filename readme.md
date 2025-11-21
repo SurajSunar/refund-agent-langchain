@@ -1,4 +1,3 @@
-
 ### About Project
 
 ---
@@ -19,4 +18,4 @@ Package `surbhu-mcp-server` is published in NPM registry. One can run `npx surbh
 - Multpiple numbers with doubling the result using multiple
 - Classification of customer inputs text as postive, negative or feedback.
 
-Note: Its just test tools created. We can add more features with authentication.
+Note: Its just the test tools created. We can add more features with authentication.
