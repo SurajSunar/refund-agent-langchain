@@ -2,7 +2,7 @@
 
 ---
 
-The project is created to understand the concept of Human in the loop using Langchain. Furthermore, there is small sample files added to understand MCP client and server.
+The project is created to understand the concept of Human in the loop using Langchain. Furthermore, there is small sample files added to understand MCP client and server. Its simple test for MCP. More compex tools can be added.
 
 Package `surbhu-mcp-server` is published in NPM registry. One can run `npx surbhu-mcp-server` and test in local.
 
